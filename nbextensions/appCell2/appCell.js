@@ -55,7 +55,6 @@ define([
             workspaceInfo = config.workspaceInfo,
             runtime = Runtime.make(),
             spec;
-
         function specializeCell() {
             cell.minimize = function() {
                 var inputArea = this.input.find('.input_area').get(0),
@@ -113,7 +112,6 @@ define([
                 if (!isAppCell(cell)) {
                     return;
                 }
-
                 var cellElement = cell.element;
                 cellElement.addClass('kb-cell').addClass('kb-app-cell');
 
@@ -244,7 +242,6 @@ define([
                 spec = Spec.make({
                     appSpec: appSpec
                 });
-
                 var meta = {
                     kbase: {
                         type: appType,

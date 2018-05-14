@@ -12,7 +12,8 @@ define([
     'common/props',
     // Wrapper for inputs
     './inputWrapperWidget',
-    'widgets/appWidgets2/fieldWidgetCompact',
+    // 'widgets/appWidgets2/fieldWidgetCompact',
+    'widgets/appWidgets2/fieldWidgetCompactTable',
     'widgets/appWidgets2/paramResolver',
 
     'common/runtime'
@@ -28,6 +29,7 @@ define([
     //Wrappers
     RowWidget,
     FieldWidget,
+    // FieldWidgetTable,
     ParamResolver,
     Runtime
 
@@ -452,7 +454,8 @@ define([
                                     return makeFieldWidget(appSpec, spec, initialParams[spec.id])
                                         .then(function (widget) {
                                             widgets.push(widget);
-
+                                            // debugger;
+                                            console.log("node", document.getElementById(inputParams.view[parameterId].id))
                                             return widget.start({
                                                 node: document.getElementById(inputParams.view[parameterId].id)
                                             });

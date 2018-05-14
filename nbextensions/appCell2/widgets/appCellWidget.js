@@ -387,6 +387,41 @@ define([
                 }
             };
         }
+        function configureWidget2() {
+            function factory() {
+                var container,
+                    widget;
+
+                function start(arg) {
+                    container = arg.node;
+                    return loadParamsWidget({
+                        node: container
+                    })
+                        .then(function (result) {
+                            widget = result;
+                        });
+                }
+
+                function stop() {
+                    return Promise.try(function () {
+                        if (widget) {
+                            return widget.instance.stop();
+                        }
+                    });
+                }
+
+                return {
+                    start: start,
+                    stop: stop
+                };
+            }
+
+            return {
+                make: function (config) {
+                    return factory(config);
+                }
+            };
+        }
 
         function viewConfigureWidget() {
             function factory() {
@@ -436,7 +471,6 @@ define([
 
         function startTab(tabId) {
             var selectedTab = controlBarTabs.tabs[tabId];
-
             if (selectedTab.widgetModule) {
                 return loadWidget(selectedTab.widgetModule)
                     .then(function(Widget) {
@@ -601,6 +635,10 @@ define([
                     // icon: 'exclamation',
                     type: 'danger',
                     widget: errorTabWidget
+                },
+                batchOps: {
+                    label: "batch",
+                    widget: logTabWidget
                 }
             }
         };
@@ -1254,12 +1292,16 @@ define([
                     ui.hideButton(actionButtons.current.name);
                 }
                 var name = state.ui.actionButton.name;
+                // var batchName = state.ui.batchButton.name;
                 ui.showButton(name);
+                // ui.showButton(batchName);
                 actionButtons.current.name = name;
                 if (state.ui.actionButton.disabled) {
                     ui.disableButton(name);
+                    // ui.disableButton(batchName);
                 } else {
                     ui.enableButton(name);
+                    // ui.enableButton(batchName);
                 }
             } else {
                 if (actionButtons.current.name) {

@@ -26,10 +26,18 @@ define([], function() {
                     error: {
                         enabled: false,
                         hidden: true
+                    },
+                    batchOps: {
+                        enabled: true,
+                        selected: true
                     }
                 },
                 actionButton: {
                     name: 'runApp',
+                    disabled: true
+                },
+                batchButton: {
+                    name: 'batch',
                     disabled: true
                 },
                 elements: {
@@ -99,7 +107,27 @@ define([], function() {
                             hidden: false,
                             selected: true
                         }
+                        }],
+                    batchOps: [{
+                        selector: {
+                            viewOnly: false
+                        },
+                        settings: {
+                            enabled: true,
+                            hidden: false,
+                            selected: false
+                        }
+                    }, {
+                        selector: {
+                            viewOnly: true
+                        },
+                        settings: {
+                            enabled: false,
+                            hidden: true,
+                            selected: false
+                        }
                     }],
+                    
                     logs: {
                         enabled: false
                     },
@@ -113,6 +141,10 @@ define([], function() {
                 },
                 actionButton: {
                     name: 'runApp',
+                    disabled: true
+                },
+                batchButton: {
+                    name: 'batch',
                     disabled: true
                 },
                 elements: {
@@ -189,6 +221,25 @@ define([], function() {
                             selected: true
                         }
                     }],
+                    batchOps: [{
+                        selector: {
+                            viewOnly: false
+                        },
+                        settings: {
+                            enabled: true,
+                            hidden: false,
+                            selected: false
+                        }
+                    }, {
+                        selector: {
+                            viewOnly: true
+                        },
+                        settings: {
+                            enabled: false,
+                            hidden: true,
+                            selected: false
+                        }
+                    }],
                     logs: {
                         enabled: false
                     },
@@ -202,6 +253,10 @@ define([], function() {
                 },
                 actionButton: {
                     name: 'runApp',
+                    disabled: false
+                },
+                batchButton: {
+                    name: 'batch',
                     disabled: false
                 },
                 elements: {
@@ -300,6 +355,10 @@ define([], function() {
                     name: 'cancel',
                     disabled: true
                 },
+                batchButton: {
+                    name: 'batch',
+                    disabled: true
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -389,7 +448,11 @@ define([], function() {
                 actionButton: {
                     name: 'cancel',
                     disabled: true
-                },
+                }, 
+                batchButton: {
+                    name: 'batch',
+                    disabled: true
+                },              
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -486,6 +549,9 @@ define([], function() {
                 },
                 actionButton: {
                     name: 'cancel'
+                },
+                batchButton: {
+                    name: 'batch'
                 },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
@@ -591,6 +657,9 @@ define([], function() {
                 actionButton: {
                     name: 'cancel'
                 },
+                batchButton: {
+                    name: 'batch'
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -682,6 +751,10 @@ define([], function() {
                     name: 'cancel',
                     default: true
                 },
+                batchButton: {
+                    name: 'batch',
+                    disabled: true
+                },
                 elements: {
                     show: ['exec-group', 'output-group'],
                     hide: ['parameters-display-group', 'parameters-group']
@@ -768,6 +841,9 @@ define([], function() {
                 actionButton: {
                     name: 'reRunApp'
                 },
+                batchButton: {
+                    name: 'batch'
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -836,6 +912,9 @@ define([], function() {
                 },
                 actionButton: {
                     name: 'reRunApp'
+                },
+                batchButton: {
+                    name: 'batch'
                 },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
@@ -911,6 +990,9 @@ define([], function() {
                 actionButton: {
                     name: 'reRunApp'
                 },
+                batchButton: {
+                    name: 'batch'
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -968,6 +1050,9 @@ define([], function() {
                 },
                 actionButton: {
                     name: 'reRunApp'
+                },
+                batchButton: {
+                    name: 'batch'
                 },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
@@ -1044,6 +1129,9 @@ define([], function() {
                 actionButton: {
                     name: 'reRunApp'
                 },
+                batchButton: {
+                    name: 'batch'
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -1118,6 +1206,9 @@ define([], function() {
                 actionButton: {
                     name: 'reRunApp'
                 },
+                batchButton: {
+                    name: 'batch'
+                },
                 elements: {
                     show: ['parameters-display-group', 'exec-group', 'output-group'],
                     hide: ['parameters-group']
@@ -1169,10 +1260,17 @@ define([], function() {
                     error: {
                         enabled: true,
                         selected: true
+                    },
+                    batchOps: {
+                        enabled: true,
+                        selected: true
                     }
                 },
                 actionButton: {
                     name: 'resetApp'
+                },
+                batchButton: {
+                    name: 'batch'
                 },
                 elements: {
                     show: ['internal-error'],

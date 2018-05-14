@@ -1,6 +1,7 @@
 *.DS_Store
 *.pyc
 /bin
+jupyter_notebook/
 kbase-extension/static/kbase/config/config.json
 kbase-extension/ipython/profile_default/history.sqlite
 kbase-extension/history.sqlite
@@ -10,7 +11,9 @@ kbase-extension/log/
 kbase-extension/kbase_templates/old/
 kbase-extension/static/components/
 kbase-extension/static/ext_components/
+kbase-extension/migrated
 node_modules/
+spec/
 install.log
 /src/build/
 /venvs/
@@ -18,6 +21,7 @@ install.log
 nbproject
 static/dist
 my_narrative_env/
+new_narrative_env_2
 
 # From https://github.com/github/gitignore/blob/master/Python.gitignore
 
