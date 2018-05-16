@@ -341,7 +341,7 @@ define([
             }
 
             var content = div({ class: ['form-horizontal', 'kb-app-parameter-row', 'parameter-panel', advanced].join(' '), dataAdvancedParameter: spec.isAdvanced(), style: { marginTop: '8px' }, id: fieldId }, [
-                div({ class: 'form-group kb-app-parameter-input field-panel', dataElement: 'field-panel', style: { marginBottom: '0' } }, [
+                div({ class: 'form-group kb-app-parameter-input field-panel meow', dataElement: 'field-panel', style: { marginBottom: '0' } }, [
                     label({ class: 'col-md-3 xcontrol-label kb-app-parameter-name control-label' }, [
                         spec.label() || spec.id()
                     ]),

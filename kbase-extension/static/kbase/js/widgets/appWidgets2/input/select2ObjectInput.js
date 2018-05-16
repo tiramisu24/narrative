@@ -207,9 +207,11 @@ define([
 
 
         function fetchData() {
+            debugger;
             var types = spec.data.constraints.types;
             return getObjectsByTypes_datalist(types)
                 .then(function(objects) {
+                    debugger;
                     objects.sort(function(a, b) {
                         if (a.saveDate < b.saveDate) {
                             return 1;
@@ -406,6 +408,7 @@ define([
         // LIFECYCLE API
         function start(arg) {
             return Promise.try(function() {
+                debugger;
                 parent = arg.node;
                 container = parent.appendChild(document.createElement('div'));
                 ui = UI.make({ node: container });
@@ -423,6 +426,7 @@ define([
 
                 return fetchData()
                     .then(function(data) {
+                        debugger;
                         doWorkspaceUpdated(data);
                         // model.availableValues = data;
                         return render();

@@ -454,8 +454,6 @@ define([
                                     return makeFieldWidget(appSpec, spec, initialParams[spec.id])
                                         .then(function (widget) {
                                             widgets.push(widget);
-                                            // debugger;
-                                            console.log("node", document.getElementById(inputParams.view[parameterId].id))
                                             return widget.start({
                                                 node: document.getElementById(inputParams.view[parameterId].id)
                                             });

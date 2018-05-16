@@ -215,12 +215,12 @@ define([
 
         function parameterInfoTypeRules(spec) {
             switch (spec.data.type) {
-                case 'float':
-                case 'int':
-                    return [
-                        tr([th('Min'), td(spec.data.constraints.min)]),
-                        tr([th('Max'), td(spec.data.constraints.max)])
-                    ];
+            case 'float':
+            case 'int':
+                return [
+                    tr([th('Min'), td(spec.data.constraints.min)]),
+                    tr([th('Max'), td(spec.data.constraints.max)])
+                ];
             }
         }
 
@@ -262,25 +262,25 @@ define([
                 div({ dataElement: 'big-tip', class: 'hidden' }, html.makeTabs({
                     alignRight: true,
                     tabs: [{
-                            label: 'Description',
-                            name: 'description',
-                            content: div({ style: { padding: '0px' } }, infoTipText)
-                        },
-                        {
-                            label: 'About',
-                            name: 'about',
-                            content: parameterInfoContent(spec)
-                        },
-                        {
-                            label: 'Rules',
-                            name: 'rules',
-                            content: parameterInfoRules(spec)
-                        },
-                        {
-                            label: 'Spec',
-                            name: 'spec',
-                            content: rawSpec(spec)
-                        }
+                        label: 'Description',
+                        name: 'description',
+                        content: div({ style: { padding: '0px' } }, infoTipText)
+                    },
+                    {
+                        label: 'About',
+                        name: 'about',
+                        content: parameterInfoContent(spec)
+                    },
+                    {
+                        label: 'Rules',
+                        name: 'rules',
+                        content: parameterInfoRules(spec)
+                    },
+                    {
+                        label: 'Spec',
+                        name: 'spec',
+                        content: rawSpec(spec)
+                    }
                     ]
                 }))
             ]);
@@ -314,8 +314,122 @@ define([
             } else {
                 infoTipText = spec.ui.hint || spec.ui.description;
             }
+            
+            // var content = div({
+            //     class: ['form-horizontal', 'kb-app-parameter-row', 'parameter-panel', advanced].join(' '),
+            //     dataAdvancedParameter: spec.ui.advanced,
+            //     id: fieldId,
+            //     style: { position: 'relative' }
+            // }, [
+            //     // disabled mask
+            //     div({
+            //         dataElement: 'field-mask',
+            //         class: 'hidden',
+            //         style: {
+            //             position: 'absolute',
+            //             top: '0',
+            //             bottom: '0',
+            //             left: '0',
+            //             right: '0',
+            //             backgroundColor: 'rgba(255,255,255, 0.5)',
+            //             zIndex: '100'
+            //         }
+            //     }),
+            //     div({
+            //         id: ids.fieldPanel,
+            //         class: 'form-group kb-app-parameter-input field-panel',
+            //         dataElement: 'field-panel',
+            //         style: {
+            //             marginBottom: '0'
+            //         }
+            //     }, [
+            //         div({ class: 'col-md-3' }, [
+            //             label({
+            //                 class: 'xcontrol-label kb-app-parameter-name control-label',
+            //                 title: infoTipText,
+            //                 style: { cursor: 'help' },
+            //                 id: events.addEvent({
+            //                     type: 'click',
+            //                     handler: function() {
+            //                         places.infoPanel.querySelector('[data-element="big-tip"]').classList.toggle('hidden');
+            //                     }
+            //                 })
+            //             }, [
+            //                 spec.ui.label || spec.ui.id
+            //             ])
+            //         ]),
+            //         div({ class: 'input-group col-md-9' }, [
+            //             div({
+            //                 id: ids.inputControl,
+            //                 dataElement: 'input-control'
+            //             }),
+            //             div({
+            //                 id: ids.feedback,
+            //                 class: 'input-group-addon kb-input-group-addon kb-app-field-feedback',
+            //                 dataElement: 'feedback',
+            //                 style: {
+            //                     width: '3px',
+            //                     height: '100%',
+            //                     'margin-left': '4px'
+            //                 }
+            //             }, [
+            //                 div({
+            //                     id: ids.feedbackIndicator,
+            //                     dataElement: 'indicator',
+            //                     style: {
+            //                         width: '3px'
+            //                     }
+            //                 })
+            //             ]),
+            //             /*div({
+            //                 class: 'input-group-addon kb-input-group-addon',
+            //                 style: {
+            //                     width: '30px',
+            //                     padding: '0'
+            //                 }
+            //             }, [
+            //                 div({ dataElement: 'info' }, button({
+            //                     class: 'btn btn-link btn-xs',
+            //                     type: 'button',
+            //                     tabindex: '-1',
+            //                     id: events.addEvent({
+            //                         type: 'click',
+            //                         handler: function () {
+            //                             places.infoPanel.querySelector('[data-element="big-tip"]').classList.toggle('hidden');
+            //                             // ui.getElement('big-tip').classList.toggle('hidden');
+            //                         }
+            //                     })
+            //                 }, span({ class: 'fa fa-info-circle' })))
+            //             ])*/
+            //         ])
+            //     ]),
+            //     div({
+            //         id: ids.messagePanel,
+            //         class: 'message-panel hidden',
+            //         dataElement: 'message-panel'
+            //     }, [
+            //         div({ class: 'col-md-3' }),
+            //         div({ class: 'col-md-9' }, [
+            //             div({
+            //                 id: ids.message,
+            //                 class: 'message',
+            //                 dataElement: 'message'
+            //             })
+            //         ])
+            //     ]),
+            //     div({
+            //         id: ids.infoPanel,
+            //         class: 'info-panel row',
+            //         dataElement: 'info-panel'
+            //     }, [
+            //         div({ class: 'col-md-12' }, div({ id: infoId }, [
+            //             renderInfoTip()
+            //         ]))
 
-            var content = div({
+            //     ])
+            // ]);
+
+            var header = div({
                 class: ['form-horizontal', 'kb-app-parameter-row', 'parameter-panel', advanced].join(' '),
                 dataAdvancedParameter: spec.ui.advanced,
                 id: fieldId,
@@ -343,14 +457,14 @@ define([
                         marginBottom: '0'
                     }
                 }, [
-                    div({ class: 'col-md-3' }, [
+                    div({ }, [
                         label({
                             class: 'xcontrol-label kb-app-parameter-name control-label',
                             title: infoTipText,
                             style: { cursor: 'help' },
                             id: events.addEvent({
                                 type: 'click',
-                                handler: function() {
+                                handler: function () {
                                     places.infoPanel.querySelector('[data-element="big-tip"]').classList.toggle('hidden');
                                 }
                             })
@@ -358,7 +472,7 @@ define([
                             spec.ui.label || spec.ui.id
                         ])
                     ]),
-                    div({ class: 'input-group col-md-9' }, [
+                    div({ class: 'input-group' }, [
                         div({
                             id: ids.inputControl,
                             dataElement: 'input-control'
@@ -380,28 +494,32 @@ define([
                                     width: '3px'
                                 }
                             })
+                        ])
+                    ]),
+                        div({ class: 'input-group' }, [
+                            div({
+                                id: ids.inputControl,
+                                dataElement: 'input-control'
+                            }),
+                            div({
+                                id: ids.feedback,
+                                class: 'input-group-addon kb-input-group-addon kb-app-field-feedback',
+                                dataElement: 'feedback',
+                                style: {
+                                    width: '3px',
+                                    height: '100%',
+                                    'margin-left': '4px'
+                                }
+                            }, [
+                                    div({
+                                        id: ids.feedbackIndicator,
+                                        dataElement: 'indicator',
+                                        style: {
+                                            width: '3px'
+                                        }
+                                    })
+                                ])
                         ]),
-                        /*div({
-                            class: 'input-group-addon kb-input-group-addon',
-                            style: {
-                                width: '30px',
-                                padding: '0'
-                            }
-                        }, [
-                            div({ dataElement: 'info' }, button({
-                                class: 'btn btn-link btn-xs',
-                                type: 'button',
-                                tabindex: '-1',
-                                id: events.addEvent({
-                                    type: 'click',
-                                    handler: function () {
-                                        places.infoPanel.querySelector('[data-element="big-tip"]').classList.toggle('hidden');
-                                        // ui.getElement('big-tip').classList.toggle('hidden');
-                                    }
-                                })
-                            }, span({ class: 'fa fa-info-circle' })))
-                        ])*/
-                    ])
                 ]),
                 div({
                     id: ids.messagePanel,
@@ -429,8 +547,34 @@ define([
                 ])
             ]);
 
+            var row = div({ class: 'input-group' }, [
+                div({
+                    id: ids.inputControl,
+                    dataElement: 'input-control'
+                }),
+                div({
+                    id: ids.feedback,
+                    class: 'input-group-addon kb-input-group-addon kb-app-field-feedback',
+                    dataElement: 'feedback',
+                    style: {
+                        width: '3px',
+                        height: '100%',
+                        'margin-left': '4px'
+                    }
+                }, [
+                    div({
+                        id: ids.feedbackIndicator,
+                        dataElement: 'indicator',
+                        style: {
+                            width: '3px'
+                        }
+                    })
+                ])
+            ]);
+
             return {
-                content: content,
+                content: header,
+                row: row, 
                 places: ids
             };
         }
@@ -447,6 +591,7 @@ define([
                 });
 
                 var rendered = render(events);
+                // debugger;
                 container.innerHTML = rendered.content;
                 events.attachEvents();
                 // TODO: use the pattern in which the render returns an object,
@@ -472,36 +617,37 @@ define([
         function start(arg) {
             return attach(arg.node)
                 .then(function() {
+                    debugger;
                     bus.on('validation', function(message) {
                         switch (message.diagnosis) {
-                            case 'valid':
-                                feedbackOk();
-                                clearError();
-                                break;
-                            case 'required-missing':
-                                feedbackRequired();
-                                clearError();
-                                break;
-                            case 'suspect':
-                                feedbackOk();
-                                clearError();
-                                setWarning({
-                                    message: message.shortMessage,
-                                    id: message.messageId
-                                });
-                                break;
-                            case 'invalid':
-                                feedbackError();
-                                clearError();
-                                setError({
-                                    id: message.messageId,
-                                    message: message.errorMessage
-                                });
-                                break;
-                            case 'optional-empty':
-                                feedbackNone();
-                                clearError();
-                                break;
+                        case 'valid':
+                            feedbackOk();
+                            clearError();
+                            break;
+                        case 'required-missing':
+                            feedbackRequired();
+                            clearError();
+                            break;
+                        case 'suspect':
+                            feedbackOk();
+                            clearError();
+                            setWarning({
+                                message: message.shortMessage,
+                                id: message.messageId
+                            });
+                            break;
+                        case 'invalid':
+                            feedbackError();
+                            clearError();
+                            setError({
+                                id: message.messageId,
+                                message: message.errorMessage
+                            });
+                            break;
+                        case 'optional-empty':
+                            feedbackNone();
+                            clearError();
+                            break;
                         }
                     });
                     // bus.on('touched', function (message) {
@@ -519,8 +665,8 @@ define([
 
                     if (inputControl.start) {
                         return inputControl.start({
-                                node: places.inputControl
-                            })
+                            node: places.inputControl
+                        })
                             .then(function() {
                                 // TODO: get rid of this pattern
                                 bus.emit('run', {

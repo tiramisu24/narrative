@@ -322,7 +322,7 @@ define([
                 },
                 id: fieldId
             }, [
-                div({ class: 'form-group kb-app-parameter-input field-panel', dataElement: 'field-panel', style: { marginBottom: '0' } }, [
+                div({ class: 'form-group kb-app-parameter-input meowfull field-panel', dataElement: 'field-panel', style: { marginBottom: '0' } }, [
                     label({
                         class: 'xcontrol-label kb-app-parameter-name control-label',
                         title: infoTipText,

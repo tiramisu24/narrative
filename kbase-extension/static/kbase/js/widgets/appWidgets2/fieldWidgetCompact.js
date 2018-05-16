@@ -337,7 +337,7 @@ define([
                 }),
                 div({
                     id: ids.fieldPanel,
-                    class: 'form-group kb-app-parameter-input field-panel',
+                    class: 'form-group kb-app-parameter-input meow3 field-panel',
                     dataElement: 'field-panel',
                     style: {
                         marginBottom: '0'
