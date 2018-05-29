@@ -20,12 +20,12 @@ define([
     'common/runtime',
     'common/semaphore',
     'common/utils',
+    'nbextensions/appCell2/widgets/tabs/jobLogViewer',
     'text!kbase/templates/job_status/status_table.html',
     'text!kbase/templates/job_status/header.html',
     'text!kbase/templates/job_status/log_panel.html',
     'text!kbase/templates/job_status/log_line.html',
     'text!kbase/templates/job_status/new_objects.html',
-
     'css!kbase/css/kbaseJobLog.css',
     'bootstrap'
 ], function (
@@ -47,6 +47,7 @@ define([
     Runtime,
     Semaphore,
     utils,
+    JobViewer,
     JobStatusTableTemplate,
     HeaderTemplate,
     LogPanelTemplate,
@@ -72,7 +73,6 @@ define([
             theSlice = [];
             startPos = 0;
         }
-
         /*
             Adds array items to the slice, starting at virtual position start.
         */
@@ -208,6 +208,9 @@ define([
             this.jobId = this.options.jobId;
             this.state = this.options.state;
             this.outputWidgetInfo = this.options.outputWidgetInfo;
+            this.widgets = {};
+            this.widgets.jobViewer = JobViewer.make({});
+   
             // expects:
             // name, id, version for appInfo
             this.appInfo = this.options.info;
@@ -217,7 +220,6 @@ define([
             });
 
             var cellNode = this.$elem.closest('.cell').get(0);
-
             function findCell() {
                 var cells = Jupyter.notebook.get_cell_elements().toArray().filter(function (element) {
                     if (element === cellNode) {
@@ -246,8 +248,8 @@ define([
              * 2. If not, use inputs as initial state.
              * 3. Initialize layout, set up bus.
              */
+            //raw object
             var cellMeta = this.getCellState();
-
             // When this is initially inserted into the Narrative, the cell metadata will not be fully populated.
             // In this case, the job state that is passed to the widget will be used, otherwise the job state
             // stored in the metadata will be used.
@@ -386,6 +388,7 @@ define([
             this.reportView = this.makeReportPanel();
             this.newDataView = this.makeNewDataView();
             var $tabDiv = $('<div>');
+            var $jobLogDiv = $('<div>');
             this.tabController = new KBaseTabs($tabDiv, {
                 tabs: [{
                         tab: 'Status',
@@ -395,9 +398,14 @@ define([
                     {
                         tab: 'Log',
                         canDelete: false,
+                        content: $jobLogDiv,
                         showContentCallback: this.initLogView.bind(this)
                     }
                 ]
+            });
+            this.widgets.jobViewer.start({
+                node: $jobLogDiv[0],
+                jobId: this.jobId
             });
             this.$elem.append($tabDiv);
         },
