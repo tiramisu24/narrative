@@ -40,7 +40,10 @@ define([
     var t = html.tag,
         form = t('form'),
         span = t('span'),
-        div = t('div');
+        div = t('div'),
+        table = t('table'),
+        tr = t('tr'),
+        th = t('th');
 
     function factory(config) {
         var runtime = Runtime.make(),
@@ -318,13 +321,22 @@ define([
                 style: { padding: '3px' },
             }, btn);
         }
+        function inputTable(){
+            return table({classes: 'batch-input-table'},[
+                tr([
+                    th('Input Objects'),
+                    th("Parameters"),
+                    th('Output Objects')
+                ])
+            ])
+        }
 
         function renderLayout(batchMode) {
             var events = Events.make(),
                 batchToggleBtn = Config.get('features').batchAppMode ? buildBatchToggleButton(batchMode, events) : null,
                 formContent = batchToggleBtn ? [batchToggleBtn] : [];
             if (batchMode) {
-                formContent.push(div('batch mode!'));
+                formContent.push(div('batch mode!'), inputTable());
             }
             else {
                 formContent = formContent.concat([

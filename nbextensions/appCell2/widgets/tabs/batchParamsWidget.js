@@ -38,7 +38,8 @@ define([
     var t = html.tag,
         form = t('form'),
         span = t('span'),
-        div = t('div');
+        div = t('div')
+        table = t('table');
 
     function factory(config) {
         var runtime = Runtime.make(),
@@ -288,6 +289,9 @@ define([
 
             events.attachEvents();
         }
+        function tableLayout(){
+
+        }
 
         function buildBatchToggleButton(batchMode, events) {
             var classes = [];
@@ -314,13 +318,13 @@ define([
             return div({
                 class: 'btn-group',
                 style: { padding: '3px' },
-            }, btn);
+            }, [btn]);
         }
 
         function renderLayout() {
             var events = Events.make(),
                 batchToggleBtn = buildBatchToggleButton(batchMode, events),
-                formContent = [batchToggleBtn, div('batch mode!')],
+                formContent = [batchToggleBtn, div('batchsdfljk mode!'), div('doe')],
                 content = form({ dataElement: 'input-widget-form' }, formContent);
             return {
                 content: content,
