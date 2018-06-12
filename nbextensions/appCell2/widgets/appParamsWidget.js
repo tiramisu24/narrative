@@ -54,6 +54,8 @@ define([
             ui,
             bus,
             places = {},
+            batchTable = null,
+            batchMode = null,
             model = Props.make(),
             paramResolver = ParamResolver.make(),
             settings = {
@@ -294,7 +296,7 @@ define([
             events.attachEvents();
         }
 
-        function buildBatchToggleButton(batchMode, events) {
+        function buildBatchToggleButton(events) {
             var classes = [];
             if (batchMode) {
                 classes.push('batch-active');
@@ -322,7 +324,7 @@ define([
             }, btn);
         }
         function inputTable(){
-            return table({classes: 'batch-input-table'},[
+            return table({class: 'batch-input-table'},[
                 tr([
                     th('Input Objects'),
                     th("Parameters"),
@@ -331,9 +333,9 @@ define([
             ])
         }
 
-        function renderLayout(batchMode) {
+        function renderLayout() {
             var events = Events.make(),
-                batchToggleBtn = Config.get('features').batchAppMode ? buildBatchToggleButton(batchMode, events) : null,
+                batchToggleBtn = Config.get('features').batchAppMode ? buildBatchToggleButton(events) : null,
                 formContent = batchToggleBtn ? [batchToggleBtn] : [];
             if (batchMode) {
                 formContent.push(div('batch mode!'), inputTable());
@@ -379,7 +381,7 @@ define([
 
         // MESSAGE HANDLERS
 
-        function doAttach(node, batchMode) {
+        function doAttach(node) {
             container = node;
             ui = UI.make({
                 node: container,
@@ -395,6 +397,8 @@ define([
                     parameterFields: ui.getElement('parameter-fields'),
                     advancedParameterFields: ui.getElement('advanced-parameter-fields')
                 };
+            }else{
+                batchTable = container.getElementsByClassName('batch-input-table')[0];
             }
         }
 
@@ -464,7 +468,6 @@ define([
             // with the parameters returned.
             // Separate out the params into the primary groups.
             var appSpec = model.getItem('appSpec');
-
             return Promise.try(function () {
                 var params = model.getItem('parameters'),
                     inputParams = makeParamsLayout(
@@ -491,6 +494,8 @@ define([
 
                 return Promise.resolve()
                     .then(function () {
+                        debugger;
+                        batchTable;
                         if (inputParams.layout.length === 0) {
                             ui.getElement('input-objects-area').classList.add('hidden');
                             // places.inputFields.innerHTML = span({
@@ -499,6 +504,7 @@ define([
                             //     }
                             // }, 'This app does not have input objects');
                         } else {
+
                             places.inputFields.innerHTML = inputParams.content;
                             return Promise.all(inputParams.layout.map(function (parameterId) {
                                 var spec = inputParams.paramMap[parameterId];
@@ -593,8 +599,9 @@ define([
                 // send parent the ready message
 
                 paramsBus.request({}, {key: {type: 'get-batch-mode'}})
-                    .then((batchMode) => {
-                        doAttach(arg.node, batchMode);
+                    .then((btMode) => {
+                        batchMode = btMode;
+                        doAttach(arg.node);
 
                         model.setItem('appSpec', arg.appSpec);
                         model.setItem('parameters', arg.parameters);
@@ -616,9 +623,10 @@ define([
 
                         var retPromise;
                         if (batchMode) {
-                            retPromise = Promise.resolve();
-                        }
-                        else {
+                            // retPromise = Promise.resolve();
+                            retPromise = renderParameters();
+                            
+                        }else {
                             retPromise = renderParameters();
                         }
                         return retPromise
