@@ -338,7 +338,35 @@ define([
                 batchToggleBtn = Config.get('features').batchAppMode ? buildBatchToggleButton(events) : null,
                 formContent = batchToggleBtn ? [batchToggleBtn] : [];
             if (batchMode) {
-                formContent.push(div('batch mode!'), inputTable());
+                var events = Events.make({ node: container });
+                var addBtn = ui.buildButton({
+                    style: { width: '80px' },
+                    label: 'Add Another Job',
+                    type: 'default',
+                    hidden: false,
+                    event: {
+                        type: 'add-input-params'
+                    },
+                    events: events
+                });
+                // var btn = ui.buildButton({
+                //     dataElement: 'batch-toggle',
+                //     style: { width: '80px' },
+                //     label: 'Batch',
+                //     name: 'batch-toggle',
+                //     events: events,
+                //     type: 'default',
+                //     classes: classes,
+                //     hidden: false,
+                //     event: {
+                //         type: 'batch-mode-toggle'
+                //     }
+                // });
+                bus.on('add-input-params', function(message) {
+                    renderParameters();
+                });
+                debugger;
+                formContent.push(div('batch mode!'), inputTable(),addBtn);
             }
             else {
                 formContent = formContent.concat([
@@ -464,6 +492,7 @@ define([
         // LIFECYCLE API
 
         function renderParameters() {
+            console.log('in renderParameters')
             // First get the app specs, which is stashed in the model,
             // with the parameters returned.
             // Separate out the params into the primary groups.
