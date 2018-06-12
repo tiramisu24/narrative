@@ -468,6 +468,10 @@ define([
             // with the parameters returned.
             // Separate out the params into the primary groups.
             var appSpec = model.getItem('appSpec');
+            if(batchMode){
+                var tr = document.createElement('tr');
+                batchTable.tBodies[0].appendChild(tr);
+            }
             return Promise.try(function () {
                 var params = model.getItem('parameters'),
                     inputParams = makeParamsLayout(
@@ -494,8 +498,6 @@ define([
 
                 return Promise.resolve()
                     .then(function () {
-                        debugger;
-                        batchTable;
                         if (inputParams.layout.length === 0) {
                             ui.getElement('input-objects-area').classList.add('hidden');
                             // places.inputFields.innerHTML = span({
@@ -504,8 +506,14 @@ define([
                             //     }
                             // }, 'This app does not have input objects');
                         } else {
+                            if(batchTable){
+                                var td = document.createElement('td');
+                                tr.appendChild(td);
+                                td.innerHTML = inputParams.content;
+                            }else{
+                                places.inputFields.innerHTML = inputParams.content;
 
-                            places.inputFields.innerHTML = inputParams.content;
+                            }
                             return Promise.all(inputParams.layout.map(function (parameterId) {
                                 var spec = inputParams.paramMap[parameterId];
                                 try {
@@ -536,7 +544,13 @@ define([
                             ui.getElement('output-objects-area').classList.add('hidden');
                             // places.outputFields.innerHTML = span({ style: { fontStyle: 'italic' } }, 'This app does not create any named output objects');
                         } else {
-                            places.outputFields.innerHTML = outputParams.content;
+                            if(batchTable){
+                                var td = document.createElement('td');
+                                tr.appendChild(td);
+                                td.innerHTML = outputParams.content;
+                            } else{
+                                places.outputFields.innerHTML = outputParams.content;
+                            }
                             return Promise.all(outputParams.layout.map(function (parameterId) {
                                 var spec = outputParams.paramMap[parameterId];
                                 try {
@@ -563,8 +577,14 @@ define([
                             // TODO: should be own node
                             ui.getElement('parameters-area').classList.add('hidden');
                             // places.parameterFields.innerHTML = span({ style: { fontStyle: 'italic' } }, 'No parameters for this app');
-                        } else {
-                            places.parameterFields.innerHTML = parameterParams.content;
+                        }else {
+                            if(batchTable){
+                                var td = document.createElement('td');
+                                tr.appendChild(td);
+                                td.innerHTML = parameterParams.content;
+                            } else{
+                                places.parameterFields.innerHTML = parameterParams.content;
+                            }
 
                             return Promise.all(parameterParams.layout.map(function (parameterId) {
                                 var spec = parameterParams.paramMap[parameterId];
