@@ -235,7 +235,6 @@ define([
             return table({ class: 'table table-striped' }, [
                 tr([th('Required'), td(spec.data.constraints.required ? 'yes' : 'no')]),
                 tr([th('Data type'), td(spec.data.type)]),
-                // tr([th('Field type'), td(spec.spec.field_type)]),
                 tr([th('Multiple values?'), td(spec.multipleItems ? 'yes' : 'no')]),
                 (function () {
                     return tr([th('Default value'), td(spec.data.defaultValue)]);
@@ -250,9 +249,6 @@ define([
 
         function parameterInfoLittleTip(spec) {
             return spec.data.type;
-            //var mult = (spec.multipleItems() ? '[]' : ''),
-            //    type = spec.dataType();
-            //return mult + type;
         }
 
 
@@ -265,7 +261,6 @@ define([
             }
 
             return div([
-                // div({dataElement: 'little-tip'}, parameterInfoLittleTip(spec)),
                 div({ dataElement: 'big-tip', class: 'hidden' }, html.makeTabs({
                     alignRight: true,
                     tabs: [{
@@ -450,12 +445,6 @@ define([
                             break;
                         }
                     });
-                    // bus.on('touched', function (message) {
-                    //     places.feedback.style.backgroundColor = 'yellow';
-                    // });
-                    // bus.on('changed', function () {
-                    //     places.feedback.style.backgroundColor = '';
-                    // });
                     bus.on('enable', function (message) {
                         doEnable();
                     });

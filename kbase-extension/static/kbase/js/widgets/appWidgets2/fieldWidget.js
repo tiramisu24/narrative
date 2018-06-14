@@ -399,7 +399,6 @@ define([
                 // which includes events and other functions to be run after
                 // content is added to the dom.
                 PR.prettyPrint(null, container);
-
                 // create the "places" shortcuts.
                 $container = $(container);
                 places = {

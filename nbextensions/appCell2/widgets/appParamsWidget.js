@@ -492,7 +492,6 @@ define([
         // LIFECYCLE API
 
         function renderParameters() {
-            console.log('in renderParameters')
             // First get the app specs, which is stashed in the model,
             // with the parameters returned.
             // Separate out the params into the primary groups.

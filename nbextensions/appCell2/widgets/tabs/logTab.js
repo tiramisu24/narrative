@@ -157,7 +157,6 @@ define([
                 startDetails(selectedJobId.job_id);
                 function startDetails(jobId) {
 
-                    console.log(jobId)
                     selectedJobId = jobId ? jobId : model.getItem('exec.jobState.job_id');
                     config.clickedId = selectedJobId;
                     return Promise.all([
